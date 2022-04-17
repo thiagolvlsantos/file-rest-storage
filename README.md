@@ -1,32 +1,32 @@
-# rest-storage
+# file-rest-storage
 
-[![CI with Maven](https://github.com/thiagolvlsantos/rest-storage/actions/workflows/maven.yml/badge.svg)](https://github.com/thiagolvlsantos/rest-storage/actions/workflows/maven.yml)
-[![CI with CodeQL](https://github.com/thiagolvlsantos/rest-storage/actions/workflows/codeql.yml/badge.svg)](https://github.com/thiagolvlsantos/rest-storage/actions/workflows/codeql.yml)
-[![CI with Sonar](https://github.com/thiagolvlsantos/rest-storage/actions/workflows/sonar.yml/badge.svg)](https://github.com/thiagolvlsantos/rest-storage/actions/workflows/sonar.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=thiagolvlsantos_rest-storage&metric=alert_status)](https://sonarcloud.io/dashboard?id=thiagolvlsantos_rest-storage)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=thiagolvlsantos_rest-storage&metric=coverage)](https://sonarcloud.io/dashboard?id=thiagolvlsantos_rest-storage)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.thiagolvlsantos/rest-storage/badge.svg)](https://repo1.maven.org/maven2/io/github/thiagolvlsantos/rest-storage/)
+[![CI with Maven](https://github.com/thiagolvlsantos/file-rest-storage/actions/workflows/maven.yml/badge.svg)](https://github.com/thiagolvlsantos/file-rest-storage/actions/workflows/maven.yml)
+[![CI with CodeQL](https://github.com/thiagolvlsantos/file-rest-storage/actions/workflows/codeql.yml/badge.svg)](https://github.com/thiagolvlsantos/file-rest-storage/actions/workflows/codeql.yml)
+[![CI with Sonar](https://github.com/thiagolvlsantos/file-rest-storage/actions/workflows/sonar.yml/badge.svg)](https://github.com/thiagolvlsantos/file-rest-storage/actions/workflows/sonar.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=thiagolvlsantos_file-rest-storage&metric=alert_status)](https://sonarcloud.io/dashboard?id=thiagolvlsantos_file-rest-storage)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=thiagolvlsantos_file-rest-storage&metric=coverage)](https://sonarcloud.io/dashboard?id=thiagolvlsantos_file-rest-storage)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.thiagolvlsantos/file-rest-storage/badge.svg)](https://repo1.maven.org/maven2/io/github/thiagolvlsantos/file-rest-storage/)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 A generic endpoint for versioned entities stored in Git repositories using git-transactions and file-storage.
 
 ## Usage
 
-Include latest version [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.thiagolvlsantos/rest-storage/badge.svg)](https://repo1.maven.org/maven2/io/github/thiagolvlsantos/rest-storage/) to your project.
+Include latest version [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.thiagolvlsantos/file-rest-storage/badge.svg)](https://repo1.maven.org/maven2/io/github/thiagolvlsantos/file-rest-storage/) to your project.
 
 ```xml
 		<dependency>
 			<groupId>io.github.thiagolvlsantos</groupId>
-			<artifactId>rest-storage</artifactId>
+			<artifactId>file-rest-storage</artifactId>
 			<version>${latestVersion}</version>
 		</dependency>
 ```
 
-## Add `@EnableRestStorage` to you app.
+## Add `@EnableFileRestStorage` to you app.
 
 ```java
 ...
-@EnableRestStorage
+@EnableFileRestStorage
 public class Application {
 	...main(String[] args) {...}
 }
@@ -36,7 +36,7 @@ public class Application {
 Example using YAMLs configuration file.
 
 ```yaml
-# OpenAPI params
+# OpenAPI params, from rest-storage
 springdoc:
   api-docs:
     path: /swagger
@@ -45,7 +45,7 @@ springdoc:
     operationsSorter: alpha # Sorting endpoints alphabetically
     tagsSorter: alpha       # Sorting tags alphabetically
 
-# Git-Transactions properties
+# Git-Transactions properties, from git-transactions
 gitt:
   repository:
     # General properties
@@ -59,6 +59,8 @@ gitt:
 ```
 
 ## Domain classes
+
+Using `file-storage ` as the backend storage.
 
 ### Entities
 
@@ -130,9 +132,9 @@ There is a default implementation for services which mix file-storage and git-tr
 
 ```java
 //...
+import io.github.thiagolvlsantos.file.rest.storage.service.AbstractService;
 import io.github.thiagolvlsantos.file.storage.util.repository.AbstractFileRepository;
 import io.github.thiagolvlsantos.git.transactions.GitRepo;
-import io.github.thiagolvlsantos.rest.storage.service.AbstractService;
 
 @Service
 @GitRepo(Tag.REPO)
@@ -149,14 +151,14 @@ public class TagService extends AbstractService<Tag> {
 
 ### Rest Handler
 
-Lastly, there is a handler for default OpenApi endpoints routing based on `{entity}` which in this example its the `Tag.REPO` name itself.
+Lastly, there is a handler (`AbstractFileRestHandler`) for default OpenApi endpoints routing based on `{entity}` which in this example its the `Tag.REPO` name itself.
 
 ```java
 //...
-import io.github.thiagolvlsantos.rest.storage.rest.AbstractRestHandler;
+import io.github.thiagolvlsantos.file.rest.storage.rest.AbstractFileRestHandler;
 
 @Component
-public class TagRestHandler extends AbstractRestHandler<Tag, TagAlias> {
+public class TagRestHandler extends AbstractFileRestHandler<Tag, TagAlias> {
 
 	public TagRestHandler() {
 		super(Tag.REPO, Tag.class, TagAlias.class);
