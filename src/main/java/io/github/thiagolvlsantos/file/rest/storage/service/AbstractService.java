@@ -20,8 +20,8 @@ import io.github.thiagolvlsantos.git.transactions.exceptions.GitTransactionsExce
 import io.github.thiagolvlsantos.git.transactions.read.GitCommit;
 import io.github.thiagolvlsantos.git.transactions.read.GitRead;
 import io.github.thiagolvlsantos.git.transactions.write.GitWrite;
-import io.github.thiagolvlsantos.rest.storage.service.HistoryVO;
-import io.github.thiagolvlsantos.rest.storage.service.WrapperVO;
+import io.github.thiagolvlsantos.rest.storage.rest.WrapperVO;
+import io.github.thiagolvlsantos.rest.storage.rest.history.HistoryVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -6,7 +6,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.github.thiagolvlsantos.rest.storage.service.HistoryVO;
+import io.github.thiagolvlsantos.rest.storage.rest.history.HistoryVO;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.metadata.MappingDirection;
