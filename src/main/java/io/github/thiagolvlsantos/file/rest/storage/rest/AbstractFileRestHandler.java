@@ -54,6 +54,8 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 		this.typeAlias = typeAlias;
 	}
 
+	// +------------- ENTITY METHODS ------------------+
+
 	@SneakyThrows
 	public void save(RestSaveEvent<P> event) {
 		event.setResult(service.save(toInstance(mapper.readValue(event.getContent(), typeAlias))));
@@ -84,6 +86,19 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 	}
 
 	@SneakyThrows
+	public void count(RestCountEvent<WrapperVO<Long>> event) {
+		event.setResult(service.count(event.getFilter(), event.getPaging(), event.getCommit(), event.getAt()));
+	}
+
+	@SneakyThrows
+	public void list(RestListEvent<List<P>> event) {
+		event.setResult(service.list(event.getFilter(), event.getPaging(), event.getSorting(), event.getCommit(),
+				event.getAt()));
+	}
+
+	// +------------- PROPERTY METHODS ------------------+
+
+	@SneakyThrows
 	public void setProperty(RestSetPropertyEvent<P> event) {
 		event.setResult(
 				service.setProperty(KeyParams.of(event.getName()), event.getProperty(), event.getDataAsString()));
@@ -103,9 +118,17 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	@SneakyThrows
 	public void properties(RestPropertiesEvent<Map<String, Object>> event) {
-		event.setResult(service.properties(KeyParams.of(event.getName()), KeyParams.of(event.getProperties(), ","),
+		event.setResult(service.properties(KeyParams.of(event.getName()), KeyParams.of(event.getProperties()),
 				event.getCommit(), event.getAt()));
 	}
+
+	@SneakyThrows
+	public void properties(RestListPropertiesEvent<Map<String, Map<String, Object>>> event) {
+		event.setResult(service.properties(KeyParams.of(event.getProperties()), event.getFilter(), event.getPaging(),
+				event.getSorting(), event.getCommit(), event.getAt()));
+	}
+
+	// +------------- RESOURCE METHODS ------------------+
 
 	@SneakyThrows
 	public void setResource(RestSetResourceEvent<P> event) {
@@ -144,6 +167,8 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 		event.setResult(objectMapper.mapList(resources, ResourceVO.class));
 	}
 
+	// +------------- HISTORY METHODS ------------------+
+
 	@SneakyThrows
 	public void history(RestHistoryEvent<List<HistoryVO>> event) {
 		event.setResult(service.history(KeyParams.of(new Object[0]), event.getPaging()));
@@ -157,22 +182,5 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 	@SneakyThrows
 	public void historyResources(RestHistoryResourceEvent<List<HistoryVO>> event) {
 		event.setResult(service.historyResources(KeyParams.of(event.getName()), event.getPath(), event.getPaging()));
-	}
-
-	@SneakyThrows
-	public void count(RestCountEvent<WrapperVO<Long>> event) {
-		event.setResult(service.count(event.getFilter(), event.getPaging(), event.getCommit(), event.getAt()));
-	}
-
-	@SneakyThrows
-	public void list(RestListEvent<List<P>> event) {
-		event.setResult(service.list(event.getFilter(), event.getPaging(), event.getSorting(), event.getCommit(),
-				event.getAt()));
-	}
-
-	@SneakyThrows
-	public void properties(RestListPropertiesEvent<Map<String, Map<String, Object>>> event) {
-		event.setResult(service.properties(KeyParams.of(event.getProperties(), ","), event.getFilter(),
-				event.getPaging(), event.getSorting(), event.getCommit(), event.getAt()));
 	}
 }
