@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.thiagolvlsantos.file.rest.storage.service.AbstractFileService;
-import io.github.thiagolvlsantos.file.storage.FileParams;
+import io.github.thiagolvlsantos.file.storage.KeyParams;
 import io.github.thiagolvlsantos.file.storage.annotations.UtilAnnotations;
 import io.github.thiagolvlsantos.file.storage.exceptions.FileStorageException;
 import io.github.thiagolvlsantos.file.storage.resource.Resource;
@@ -63,7 +63,7 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	@SneakyThrows
 	public void read(RestReadEvent<P> event) {
-		event.setResult(service.read(FileParams.of(event.getName()), event.getCommit(), event.getAt()));
+		event.setResult(service.read(KeyParams.of(event.getName()), event.getCommit(), event.getAt()));
 	}
 
 	@SneakyThrows
@@ -80,13 +80,13 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	@SneakyThrows
 	public void delete(RestDeleteEvent<P> event) {
-		event.setResult(service.delete(FileParams.of(event.getName())));
+		event.setResult(service.delete(KeyParams.of(event.getName())));
 	}
 
 	@SneakyThrows
 	public void setProperty(RestSetPropertyEvent<P> event) {
 		event.setResult(
-				service.setProperty(FileParams.of(event.getName()), event.getProperty(), event.getDataAsString()));
+				service.setProperty(KeyParams.of(event.getName()), event.getProperty(), event.getDataAsString()));
 	}
 
 	@SneakyThrows
@@ -97,25 +97,25 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	@SneakyThrows
 	public void getProperty(RestGetPropertyEvent<WrapperVO<Object>> event) {
-		event.setResult(service.getProperty(FileParams.of(event.getName()), event.getProperty(), event.getCommit(),
+		event.setResult(service.getProperty(KeyParams.of(event.getName()), event.getProperty(), event.getCommit(),
 				event.getAt()));
 	}
 
 	@SneakyThrows
 	public void properties(RestPropertiesEvent<Map<String, Object>> event) {
-		event.setResult(service.properties(FileParams.of(event.getName()), FileParams.of(event.getProperties(), ","),
+		event.setResult(service.properties(KeyParams.of(event.getName()), KeyParams.of(event.getProperties(), ","),
 				event.getCommit(), event.getAt()));
 	}
 
 	@SneakyThrows
 	public void setResource(RestSetResourceEvent<P> event) {
 		Resource resource = objectMapper.map(event.getResource(), Resource.class);
-		event.setResult(service.setResource(FileParams.of(event.getName()), resource));
+		event.setResult(service.setResource(KeyParams.of(event.getName()), resource));
 	}
 
 	@SneakyThrows
 	public void getResource(RestGetResourceEvent<ResourceVO> event) {
-		Resource resource = service.getResource(FileParams.of(event.getName()), event.getPath(), event.getCommit(),
+		Resource resource = service.getResource(KeyParams.of(event.getName()), event.getPath(), event.getCommit(),
 				event.getAt());
 		event.setResult(objectMapper.map(resource, ResourceVO.class));
 	}
@@ -123,40 +123,40 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 	@SneakyThrows
 	public void updateResource(RestUpdateResourceEvent<P> event) {
 		Resource resource = objectMapper.map(event.getResource(), Resource.class);
-		event.setResult(service.updateResource(FileParams.of(event.getName()), resource));
+		event.setResult(service.updateResource(KeyParams.of(event.getName()), resource));
 	}
 
 	@SneakyThrows
 	public void deleteResource(RestDeleteResourceEvent<P> event) {
-		event.setResult(service.deleteResource(FileParams.of(event.getName()), event.getPath()));
+		event.setResult(service.deleteResource(KeyParams.of(event.getName()), event.getPath()));
 	}
 
 	@SneakyThrows
 	public void countResources(RestCountResourcesEvent<WrapperVO<Long>> event) {
-		event.setResult(service.countResources(FileParams.of(event.getName()), event.getFilter(), event.getPaging(),
+		event.setResult(service.countResources(KeyParams.of(event.getName()), event.getFilter(), event.getPaging(),
 				event.getCommit(), event.getAt()));
 	}
 
 	@SneakyThrows
 	public void listResources(RestListResourcesEvent<List<ResourceVO>> event) {
-		List<Resource> resources = service.listResources(FileParams.of(event.getName()), event.getFilter(),
+		List<Resource> resources = service.listResources(KeyParams.of(event.getName()), event.getFilter(),
 				event.getPaging(), event.getSorting(), event.getCommit(), event.getAt());
 		event.setResult(objectMapper.mapList(resources, ResourceVO.class));
 	}
 
 	@SneakyThrows
 	public void history(RestHistoryEvent<List<HistoryVO>> event) {
-		event.setResult(service.history(FileParams.of(new Object[0]), event.getPaging()));
+		event.setResult(service.history(KeyParams.of(new Object[0]), event.getPaging()));
 	}
 
 	@SneakyThrows
 	public void historyName(RestHistoryNameEvent<List<HistoryVO>> event) {
-		event.setResult(service.history(FileParams.of(event.getName()), event.getPaging()));
+		event.setResult(service.history(KeyParams.of(event.getName()), event.getPaging()));
 	}
 
 	@SneakyThrows
 	public void historyResources(RestHistoryResourceEvent<List<HistoryVO>> event) {
-		event.setResult(service.historyResources(FileParams.of(event.getName()), event.getPath(), event.getPaging()));
+		event.setResult(service.historyResources(KeyParams.of(event.getName()), event.getPath(), event.getPaging()));
 	}
 
 	@SneakyThrows
@@ -172,7 +172,7 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	@SneakyThrows
 	public void properties(RestListPropertiesEvent<Map<String, Map<String, Object>>> event) {
-		event.setResult(service.properties(FileParams.of(event.getProperties(), ","), event.getFilter(),
+		event.setResult(service.properties(KeyParams.of(event.getProperties(), ","), event.getFilter(),
 				event.getPaging(), event.getSorting(), event.getCommit(), event.getAt()));
 	}
 }

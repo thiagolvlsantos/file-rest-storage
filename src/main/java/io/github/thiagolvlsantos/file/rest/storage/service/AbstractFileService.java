@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 
 import io.github.thiagolvlsantos.file.rest.storage.rest.IObjectMapper;
-import io.github.thiagolvlsantos.file.storage.FilePaging;
-import io.github.thiagolvlsantos.file.storage.FileParams;
+import io.github.thiagolvlsantos.file.storage.KeyParams;
 import io.github.thiagolvlsantos.file.storage.exceptions.FileStorageException;
 import io.github.thiagolvlsantos.file.storage.exceptions.FileStorageNotFoundException;
 import io.github.thiagolvlsantos.file.storage.resource.Resource;
+import io.github.thiagolvlsantos.file.storage.search.FilePaging;
 import io.github.thiagolvlsantos.file.storage.util.repository.AbstractFileRepository;
 import io.github.thiagolvlsantos.git.transactions.GitRepo;
 import io.github.thiagolvlsantos.git.transactions.GitServices;
@@ -83,7 +83,7 @@ public class AbstractFileService<T> {
 	}
 
 	@GitRead
-	public T read(FileParams keys, @GitCommit String commit, @GitCommit Long at) {
+	public T read(KeyParams keys, @GitCommit String commit, @GitCommit Long at) {
 		try {
 			beforeRead(keys, commit, at);
 			T result = repository().read(readDirectory(), keys);
@@ -95,13 +95,13 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeRead(FileParams keys, String commit, Long at) {
+	protected void beforeRead(KeyParams keys, String commit, Long at) {
 	}
 
-	protected void afterReadSuccess(FileParams keys, String commit, Long at, T result) {
+	protected void afterReadSuccess(KeyParams keys, String commit, Long at, T result) {
 	}
 
-	protected void afterReadError(FileParams keys, String commit, Long at, Throwable e) {
+	protected void afterReadError(KeyParams keys, String commit, Long at, Throwable e) {
 	}
 
 	@GitWrite
@@ -130,7 +130,7 @@ public class AbstractFileService<T> {
 	}
 
 	@GitWrite
-	public T delete(FileParams keys) {
+	public T delete(KeyParams keys) {
 		try {
 			beforeDelete(keys);
 			T result = repository().delete(writeDirectory(), keys);
@@ -142,13 +142,13 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeDelete(FileParams keys) {
+	protected void beforeDelete(KeyParams keys) {
 	}
 
-	protected void afterDeleteSuccess(FileParams keys, T result) {
+	protected void afterDeleteSuccess(KeyParams keys, T result) {
 	}
 
-	protected void afterDeleteError(FileParams keys, Throwable e) {
+	protected void afterDeleteError(KeyParams keys, Throwable e) {
 	}
 
 	@GitRead
@@ -199,7 +199,7 @@ public class AbstractFileService<T> {
 	// +------------- PROPERTY METHODS ------------------+
 
 	@GitWrite
-	public T setProperty(FileParams keys, String property, String data) {
+	public T setProperty(KeyParams keys, String property, String data) {
 		try {
 			beforeSetProperty(keys, property, data);
 			T result = repository().setProperty(writeDirectory(), keys, property, data);
@@ -211,13 +211,13 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeSetProperty(FileParams keys, String property, String data) {
+	protected void beforeSetProperty(KeyParams keys, String property, String data) {
 	}
 
-	protected void afterSetPropertySuccess(FileParams keys, String property, String data, T result) {
+	protected void afterSetPropertySuccess(KeyParams keys, String property, String data, T result) {
 	}
 
-	protected void afterSetPropertyError(FileParams keys, String property, String data, Throwable e) {
+	protected void afterSetPropertyError(KeyParams keys, String property, String data, Throwable e) {
 	}
 
 	@GitWrite
@@ -245,7 +245,7 @@ public class AbstractFileService<T> {
 	}
 
 	@GitRead
-	public WrapperVO<Object> getProperty(FileParams keys, String property, @GitCommit String commit,
+	public WrapperVO<Object> getProperty(KeyParams keys, String property, @GitCommit String commit,
 			@GitCommit Long at) {
 		try {
 			beforeGetProperty(keys, property, commit, at);
@@ -258,18 +258,18 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeGetProperty(FileParams keys, String property, String commit, Long at) {
+	protected void beforeGetProperty(KeyParams keys, String property, String commit, Long at) {
 	}
 
-	protected void afterGetPropertySuccess(FileParams keys, String property, String commit, Long at,
+	protected void afterGetPropertySuccess(KeyParams keys, String property, String commit, Long at,
 			WrapperVO<Object> result) {
 	}
 
-	protected void afterGetPropertyError(FileParams keys, String property, String commit, Long at, Throwable e) {
+	protected void afterGetPropertyError(KeyParams keys, String property, String commit, Long at, Throwable e) {
 	}
 
 	@GitRead
-	public Map<String, Object> properties(FileParams keys, FileParams names, @GitCommit String commit,
+	public Map<String, Object> properties(KeyParams keys, KeyParams names, @GitCommit String commit,
 			@GitCommit Long at) {
 		Map<String, Object> result;
 		try {
@@ -283,18 +283,18 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeProperties(FileParams keys, FileParams names, String commit, Long at) {
+	protected void beforeProperties(KeyParams keys, KeyParams names, String commit, Long at) {
 	}
 
-	protected void afterPropertiesSuccess(FileParams keys, FileParams names, String commit, Long at,
+	protected void afterPropertiesSuccess(KeyParams keys, KeyParams names, String commit, Long at,
 			Map<String, Object> result) {
 	}
 
-	protected void afterPropertiesError(FileParams keys, FileParams names, String commit, Long at, Throwable e) {
+	protected void afterPropertiesError(KeyParams keys, KeyParams names, String commit, Long at, Throwable e) {
 	}
 
 	@GitRead
-	public Map<String, Map<String, Object>> properties(FileParams names, String filter, String paging, String sorting,
+	public Map<String, Map<String, Object>> properties(KeyParams names, String filter, String paging, String sorting,
 			@GitCommit String commit, @GitCommit Long at) {
 		Map<String, Map<String, Object>> result;
 		try {
@@ -308,22 +308,22 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeProperties(FileParams names, String filter, String paging, String sorting, String commit,
+	protected void beforeProperties(KeyParams names, String filter, String paging, String sorting, String commit,
 			Long at) {
 	}
 
-	protected void afterPropertiesSuccess(FileParams names, String filter, String paging, String sorting, String commit,
+	protected void afterPropertiesSuccess(KeyParams names, String filter, String paging, String sorting, String commit,
 			Long at, Map<String, Map<String, Object>> result) {
 	}
 
-	protected void afterPropertiesError(FileParams names, String filter, String paging, String sorting, String commit,
+	protected void afterPropertiesError(KeyParams names, String filter, String paging, String sorting, String commit,
 			Long at, Throwable e) {
 	}
 
 	// +------------- RESOURCE METHODS ------------------+
 
 	@GitWrite
-	public T setResource(FileParams keys, Resource resource) {
+	public T setResource(KeyParams keys, Resource resource) {
 		try {
 			beforeSetResource(keys, resource);
 			T result = repository().setResource(writeDirectory(), keys, resource);
@@ -335,20 +335,20 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeSetResource(FileParams keys, Resource resource) {
+	protected void beforeSetResource(KeyParams keys, Resource resource) {
 		if (repository().existsResources(writeDirectory(), keys, resource.getMetadata().getPath())) {
 			throw new IllegalArgumentException("Resource already exists.");
 		}
 	}
 
-	protected void afterSetResourceSuccess(FileParams keys, Resource resource, T result) {
+	protected void afterSetResourceSuccess(KeyParams keys, Resource resource, T result) {
 	}
 
-	protected void afterSetResourceError(FileParams keys, Resource resource, Throwable e) {
+	protected void afterSetResourceError(KeyParams keys, Resource resource, Throwable e) {
 	}
 
 	@GitRead
-	public Resource getResource(FileParams keys, String path, @GitCommit String commit, @GitCommit Long at) {
+	public Resource getResource(KeyParams keys, String path, @GitCommit String commit, @GitCommit Long at) {
 		try {
 			beforeGetResource(keys, path, commit, at);
 			Resource result = repository().getResource(readDirectory(), keys, path);
@@ -360,17 +360,17 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeGetResource(FileParams keys, String path, String commit, Long at) {
+	protected void beforeGetResource(KeyParams keys, String path, String commit, Long at) {
 	}
 
-	protected void afterGetResourceSuccess(FileParams keys, String path, String commit, Long at, Resource result) {
+	protected void afterGetResourceSuccess(KeyParams keys, String path, String commit, Long at, Resource result) {
 	}
 
-	protected void afterGetResourceError(FileParams keys, String path, String commit, Long at, Throwable e) {
+	protected void afterGetResourceError(KeyParams keys, String path, String commit, Long at, Throwable e) {
 	}
 
 	@GitWrite
-	public T updateResource(FileParams keys, Resource resource) {
+	public T updateResource(KeyParams keys, Resource resource) {
 		try {
 			beforeUpdateResource(keys, resource);
 			T result = repository().setResource(writeDirectory(), keys, resource);
@@ -382,20 +382,20 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeUpdateResource(FileParams keys, Resource resource) {
+	protected void beforeUpdateResource(KeyParams keys, Resource resource) {
 		if (!repository().existsResources(writeDirectory(), keys, resource.getMetadata().getPath())) {
 			throw new IllegalArgumentException("Resource not found.");
 		}
 	}
 
-	private void afterUpdateResourceSuccess(FileParams keys, Resource resource, T result) {
+	private void afterUpdateResourceSuccess(KeyParams keys, Resource resource, T result) {
 	}
 
-	private void afterUpdateResourceError(FileParams keys, Resource resource, Throwable e) {
+	private void afterUpdateResourceError(KeyParams keys, Resource resource, Throwable e) {
 	}
 
 	@GitWrite
-	public T deleteResource(FileParams keys, String path) {
+	public T deleteResource(KeyParams keys, String path) {
 		try {
 			beforeDeleteResource(keys, path);
 			T result = repository().deleteResource(writeDirectory(), keys, path);
@@ -407,17 +407,17 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeDeleteResource(FileParams keys, String path) {
+	protected void beforeDeleteResource(KeyParams keys, String path) {
 	}
 
-	protected void afterDeleteResourceSuccess(FileParams keys, String path, T result) {
+	protected void afterDeleteResourceSuccess(KeyParams keys, String path, T result) {
 	}
 
-	protected void afterDeleteResourceError(FileParams keys, String path, Throwable e) {
+	protected void afterDeleteResourceError(KeyParams keys, String path, Throwable e) {
 	}
 
 	@GitRead
-	public WrapperVO<Long> countResources(FileParams keys, String filter, String paging, @GitCommit String commit,
+	public WrapperVO<Long> countResources(KeyParams keys, String filter, String paging, @GitCommit String commit,
 			@GitCommit Long at) {
 		try {
 			beforeCountResources(keys, filter, paging, commit, at);
@@ -431,19 +431,19 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeCountResources(FileParams keys, String filter, String paging, String commit, Long at) {
+	protected void beforeCountResources(KeyParams keys, String filter, String paging, String commit, Long at) {
 	}
 
-	protected void afterCountResourcesSuccess(FileParams keys, String filter, String paging, String commit, Long at,
+	protected void afterCountResourcesSuccess(KeyParams keys, String filter, String paging, String commit, Long at,
 			WrapperVO<Long> result) {
 	}
 
-	protected void afterCountResourcesError(FileParams keys, String filter, String paging, String commit, Long at,
+	protected void afterCountResourcesError(KeyParams keys, String filter, String paging, String commit, Long at,
 			Throwable e) {
 	}
 
 	@GitRead
-	public List<Resource> listResources(FileParams keys, String filter, String paging, String sorting,
+	public List<Resource> listResources(KeyParams keys, String filter, String paging, String sorting,
 			@GitCommit String commit, @GitCommit Long at) {
 		try {
 			beforeListResources(keys, filter, paging, sorting, commit, at);
@@ -456,22 +456,22 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeListResources(FileParams keys, String filter, String paging, String sorting, String commit,
+	protected void beforeListResources(KeyParams keys, String filter, String paging, String sorting, String commit,
 			Long at) {
 	}
 
-	protected void afterListResourcesSuccess(FileParams keys, String filter, String paging, String sorting,
+	protected void afterListResourcesSuccess(KeyParams keys, String filter, String paging, String sorting,
 			String commit, Long at, List<Resource> result) {
 	}
 
-	protected void afterListResourcesError(FileParams keys, String filter, String paging, String sorting, String commit,
+	protected void afterListResourcesError(KeyParams keys, String filter, String paging, String sorting, String commit,
 			Long at, Throwable e) {
 	}
 
 	// +------------- HISTORY METHODS ------------------+
 
 	@GitRead
-	public List<HistoryVO> history(FileParams keys, String paging) {
+	public List<HistoryVO> history(KeyParams keys, String paging) {
 		try {
 			FilePaging page = repository().paging(paging);
 			Integer skip = page != null ? page.getSkip() : null;
@@ -488,18 +488,18 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeHistory(FileParams keys, String paging, Integer skip, Integer max) {
+	protected void beforeHistory(KeyParams keys, String paging, Integer skip, Integer max) {
 	}
 
-	protected void afterHistorySuccess(FileParams keys, String paging, Integer skip, Integer max,
+	protected void afterHistorySuccess(KeyParams keys, String paging, Integer skip, Integer max,
 			List<HistoryVO> result) {
 	}
 
-	protected void afterHistoryError(FileParams keys, String paging, Throwable e) {
+	protected void afterHistoryError(KeyParams keys, String paging, Throwable e) {
 	}
 
 	@GitRead
-	public List<HistoryVO> historyResources(FileParams keys, String path, String paging) {
+	public List<HistoryVO> historyResources(KeyParams keys, String path, String paging) {
 		try {
 			FilePaging page = repository().paging(paging);
 			Integer skip = page != null ? page.getSkip() : null;
@@ -516,13 +516,13 @@ public class AbstractFileService<T> {
 		}
 	}
 
-	protected void beforeHistoryResources(FileParams keys, String path, String paging, Integer skip, Integer max) {
+	protected void beforeHistoryResources(KeyParams keys, String path, String paging, Integer skip, Integer max) {
 	}
 
-	protected void afterHistoryResourcesSuccess(FileParams keys, String path, String paging, Integer skip, Integer max,
+	protected void afterHistoryResourcesSuccess(KeyParams keys, String path, String paging, Integer skip, Integer max,
 			List<HistoryVO> result) {
 	}
 
-	protected void afterHistoryResourcesError(FileParams keys, String path, String paging, Throwable e) {
+	protected void afterHistoryResourcesError(KeyParams keys, String path, String paging, Throwable e) {
 	}
 }
