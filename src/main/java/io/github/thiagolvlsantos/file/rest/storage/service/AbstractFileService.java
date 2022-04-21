@@ -22,15 +22,16 @@ import io.github.thiagolvlsantos.git.transactions.read.GitRead;
 import io.github.thiagolvlsantos.git.transactions.write.GitWrite;
 import io.github.thiagolvlsantos.rest.storage.rest.WrapperVO;
 import io.github.thiagolvlsantos.rest.storage.rest.history.HistoryVO;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-public abstract class AbstractService<T> {
+public class AbstractFileService<T> {
 
 	private @Autowired GitServices gits;
 	private @Autowired IObjectMapper mapper;
+	private @Autowired AbstractFileRepository<T> repository;
 
-	public abstract AbstractFileRepository<T> repository();
+	public AbstractFileRepository<T> repository() {
+		return repository;
+	}
 
 	// +---
 	public String group() {

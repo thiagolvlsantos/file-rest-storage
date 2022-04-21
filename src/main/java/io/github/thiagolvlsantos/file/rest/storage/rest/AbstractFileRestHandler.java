@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.github.thiagolvlsantos.file.rest.storage.service.AbstractService;
+import io.github.thiagolvlsantos.file.rest.storage.service.AbstractFileService;
 import io.github.thiagolvlsantos.file.storage.FileParams;
 import io.github.thiagolvlsantos.file.storage.annotations.UtilAnnotations;
 import io.github.thiagolvlsantos.file.storage.exceptions.FileStorageException;
@@ -47,7 +47,7 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 	protected Class<Q> typeAlias;
 	protected @Autowired IObjectMapper objectMapper;
 	protected @Autowired ObjectMapper mapper;
-	protected @Autowired AbstractService<P> service;
+	protected @Autowired AbstractFileService<P> service;
 
 	public AbstractFileRestHandler(String entity, Class<P> type, Class<Q> typeAlias) {
 		super(entity, type);
