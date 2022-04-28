@@ -244,6 +244,13 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+	</repositories>
+
 	<profiles>
 		<profile>
 			<id>sign</id>
@@ -359,8 +366,7 @@
 				</repository>
 			</distributionManagement>
 			<build>
-				<plugins>
-				</plugins>
+				<plugins></plugins>
 			</build>
 		</profile>
 	</profiles>
