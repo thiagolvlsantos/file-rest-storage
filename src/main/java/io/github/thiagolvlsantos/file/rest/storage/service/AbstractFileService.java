@@ -199,6 +199,11 @@ public class AbstractFileService<T> {
 	// +------------- PROPERTY METHODS ------------------+
 
 	@GitWrite
+	public Object newValue(String property, String data, Object reference) {
+		return repository().newValue(property, data, reference);
+	}
+
+	@GitWrite
 	public T setProperty(KeyParams keys, String property, String data) {
 		try {
 			beforeSetProperty(keys, property, data);
