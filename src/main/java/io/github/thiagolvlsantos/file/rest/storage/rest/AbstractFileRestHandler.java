@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.github.thiagolvlsantos.file.rest.storage.service.AbstractFileService;
 import io.github.thiagolvlsantos.file.storage.KeyParams;
 import io.github.thiagolvlsantos.file.storage.annotations.UtilAnnotations;
@@ -46,7 +44,6 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	protected Class<Q> typeAlias;
 	protected @Autowired IObjectMapper objectMapper;
-	protected @Autowired ObjectMapper mapper;
 	protected @Autowired AbstractFileService<P> service;
 
 	public AbstractFileRestHandler(String entity, Class<P> type, Class<Q> typeAlias) {
@@ -58,7 +55,7 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	@SneakyThrows
 	public void save(RestSaveEvent<P> event) {
-		event.setResult(service.save(toInstance(mapper.readValue(event.getContent(), typeAlias))));
+		event.setResult(service.save(toInstance(objectMapper.read(event.getContent(), typeAlias))));
 	}
 
 	protected abstract P toInstance(Q alias);
@@ -70,7 +67,7 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 
 	@SneakyThrows
 	public void update(RestUpdateEvent<P> event) {
-		P candidate = mapper.readValue(event.getContent(), type);
+		P candidate = objectMapper.read(event.getContent(), type);
 		String keys = UtilAnnotations.getKeysChain(type, candidate);
 		String name = event.getName();
 		if (!name.equalsIgnoreCase(keys)) {
