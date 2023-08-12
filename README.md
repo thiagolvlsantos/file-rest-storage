@@ -181,4 +181,4 @@ This is a generic endpoint where if you use `Tag.REPO` ('tags') as a replacement
 
 ## Build
 
-Localy, from this root directory call Maven commands or `bin/<script name>` at your will.
+Localy, from this root directory call Maven commands or `bin/<script name>` at your will...
