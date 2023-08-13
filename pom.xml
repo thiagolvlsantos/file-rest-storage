@@ -11,7 +11,7 @@
 
 	<groupId>io.github.thiagolvlsantos</groupId>
 	<artifactId>file-rest-storage</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 
 	<name>${project.artifactId}</name>
 	<description>Rest storage using file-storage + git-transactions as backend.</description>
@@ -59,7 +59,7 @@
 		<url>https://${project.domain.name}/${project.owner.login}/${project.artifactId}.git</url>
 		<connection>scm:git:git://${project.domain.name}/${project.owner.login}/${project.artifactId}.git</connection>
 		<developerConnection>scm:git:git@${project.domain.name}:${project.owner.login}/${project.artifactId}.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>file-rest-storage-0.0.1</tag>
 	</scm>
 
 	<url>https://${project.domain.name}/${project.owner.login}/${project.artifactId}</url>
@@ -366,7 +366,7 @@
 				</repository>
 			</distributionManagement>
 			<build>
-				<plugins></plugins>
+				<plugins />
 			</build>
 		</profile>
 	</profiles>
