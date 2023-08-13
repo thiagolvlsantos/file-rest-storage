@@ -48,10 +48,10 @@
 		<sonar.coverage.exclusions>**/*Print.java,**/*Web.java,**/*Constants.java,**/*Test.java</sonar.coverage.exclusions>
 
 		<!-- DEPENDENCIES -->
-		<git-transactions.version>0.0.5-SNAPSHOT</git-transactions.version>
-		<file-storage.version>0.0.5-SNAPSHOT</file-storage.version>
-		<json-predicate.version>0.0.8-SNAPSHOT</json-predicate.version>
-		<rest-storage.version>0.0.2-SNAPSHOT</rest-storage.version>
+		<git-transactions.version>0.0.5</git-transactions.version>
+		<file-storage.version>0.0.5</file-storage.version>
+		<json-predicate.version>0.0.8</json-predicate.version>
+		<rest-storage.version>0.0.2</rest-storage.version>
 		<orika-core.version>1.5.4</orika-core.version>
 	</properties>
 
