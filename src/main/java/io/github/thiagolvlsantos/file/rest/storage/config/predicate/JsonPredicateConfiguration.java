@@ -10,7 +10,7 @@ import io.github.thiagolvlsantos.json.predicate.impl.PredicateFactoryJson;
 public class JsonPredicateConfiguration {
 
 	@Bean
-	public IPredicateFactory factory() {
+	protected IPredicateFactory factory() {
 		return new PredicateFactoryJson();
 	}
 }

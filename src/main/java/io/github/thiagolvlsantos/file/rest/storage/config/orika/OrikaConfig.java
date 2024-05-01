@@ -15,7 +15,7 @@ public class OrikaConfig {
 	private DefaultMapperFactory factory;
 
 	@Bean
-	public MapperFactory mapperFactory() {
+	protected MapperFactory mapperFactory() {
 		init();
 		return factory;
 	}
@@ -29,7 +29,7 @@ public class OrikaConfig {
 	}
 
 	@Bean
-	public MapperFacade mapperFacade() {
+	protected MapperFacade mapperFacade() {
 		init();
 		return factory.getMapperFacade();
 	}
