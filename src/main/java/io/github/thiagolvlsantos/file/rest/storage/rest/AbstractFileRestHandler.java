@@ -46,7 +46,7 @@ public abstract class AbstractFileRestHandler<P, Q> extends AbstractRestHandler<
 	protected @Autowired IObjectMapper objectMapper;
 	protected @Autowired AbstractFileService<P> service;
 
-	public AbstractFileRestHandler(String entity, Class<P> type, Class<Q> typeAlias) {
+	protected AbstractFileRestHandler(String entity, Class<P> type, Class<Q> typeAlias) {
 		super(entity, type);
 		this.typeAlias = typeAlias;
 	}

@@ -77,9 +77,11 @@ public class AbstractFileService<T> {
 	}
 
 	protected void afterSaveSuccess(T obj, T result) {
+		// default to nothing
 	}
 
 	protected void afterSaveError(T obj, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -96,12 +98,15 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeRead(KeyParams keys, String commit, Long at) {
+		// default to nothing
 	}
 
 	protected void afterReadSuccess(KeyParams keys, String commit, Long at, T result) {
+		// default to nothing
 	}
 
 	protected void afterReadError(KeyParams keys, String commit, Long at, Throwable e) {
+		// default to nothing
 	}
 
 	@GitWrite
@@ -124,9 +129,11 @@ public class AbstractFileService<T> {
 	}
 
 	protected void afterUpdateSuccess(T obj, T result) {
+		// default to nothing
 	}
 
 	protected void afterUpdateError(T obj, Throwable e) {
+		// default to nothing
 	}
 
 	@GitWrite
@@ -143,12 +150,15 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeDelete(KeyParams keys) {
+		// default to nothing
 	}
 
 	protected void afterDeleteSuccess(KeyParams keys, T result) {
+		// default to nothing
 	}
 
 	protected void afterDeleteError(KeyParams keys, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -165,12 +175,15 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeCount(String filter, String paging, String commit, Long at) {
+		// default to nothing
 	}
 
 	protected void afterCountSuccess(String filter, String paging, String commit, Long at, WrapperVO<Long> result) {
+		// default to nothing
 	}
 
 	protected void afterCountError(String filter, String paging, String commit, Long at, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -187,13 +200,16 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeList(String filter, String paging, String sorting, String commit, Long at) {
+		// default to nothing
 	}
 
 	protected void afterListSuccess(String filter, String paging, String sorting, String commit, Long at,
 			List<T> result) {
+		// default to nothing
 	}
 
 	protected void afterListError(String filter, String paging, String sorting, String commit, Long at, Throwable e) {
+		// default to nothing
 	}
 
 	// +------------- PROPERTY METHODS ------------------+
@@ -217,12 +233,15 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeSetProperty(KeyParams keys, String property, String data) {
+		// default to nothing
 	}
 
 	protected void afterSetPropertySuccess(KeyParams keys, String property, String data, T result) {
+		// default to nothing
 	}
 
 	protected void afterSetPropertyError(KeyParams keys, String property, String data, Throwable e) {
+		// default to nothing
 	}
 
 	@GitWrite
@@ -239,14 +258,17 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeSetProperty(String property, String data, String filter, String paging, String sorting) {
+		// default to nothing
 	}
 
 	protected void afterSetPropertySuccess(String property, String data, String filter, String paging, String sorting,
 			List<T> result) {
+		// default to nothing
 	}
 
 	protected void afterSetPropertyError(String property, String data, String filter, String paging, String sorting,
 			Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -264,13 +286,16 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeGetProperty(KeyParams keys, String property, String commit, Long at) {
+		// default to nothing
 	}
 
 	protected void afterGetPropertySuccess(KeyParams keys, String property, String commit, Long at,
 			WrapperVO<Object> result) {
+		// default to nothing
 	}
 
 	protected void afterGetPropertyError(KeyParams keys, String property, String commit, Long at, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -289,13 +314,16 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeProperties(KeyParams keys, KeyParams names, String commit, Long at) {
+		// default to nothing
 	}
 
 	protected void afterPropertiesSuccess(KeyParams keys, KeyParams names, String commit, Long at,
 			Map<String, Object> result) {
+		// default to nothing
 	}
 
 	protected void afterPropertiesError(KeyParams keys, KeyParams names, String commit, Long at, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -315,14 +343,17 @@ public class AbstractFileService<T> {
 
 	protected void beforeProperties(KeyParams names, String filter, String paging, String sorting, String commit,
 			Long at) {
+		// default to nothing
 	}
 
 	protected void afterPropertiesSuccess(KeyParams names, String filter, String paging, String sorting, String commit,
 			Long at, Map<String, Map<String, Object>> result) {
+		// default to nothing
 	}
 
 	protected void afterPropertiesError(KeyParams names, String filter, String paging, String sorting, String commit,
 			Long at, Throwable e) {
+		// default to nothing
 	}
 
 	// +------------- RESOURCE METHODS ------------------+
@@ -347,9 +378,11 @@ public class AbstractFileService<T> {
 	}
 
 	protected void afterSetResourceSuccess(KeyParams keys, Resource resource, T result) {
+		// default to nothing
 	}
 
 	protected void afterSetResourceError(KeyParams keys, Resource resource, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -366,12 +399,15 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeGetResource(KeyParams keys, String path, String commit, Long at) {
+		// default to nothing
 	}
 
 	protected void afterGetResourceSuccess(KeyParams keys, String path, String commit, Long at, Resource result) {
+		// default to nothing
 	}
 
 	protected void afterGetResourceError(KeyParams keys, String path, String commit, Long at, Throwable e) {
+		// default to nothing
 	}
 
 	@GitWrite
@@ -394,9 +430,11 @@ public class AbstractFileService<T> {
 	}
 
 	private void afterUpdateResourceSuccess(KeyParams keys, Resource resource, T result) {
+		// default to nothing
 	}
 
 	private void afterUpdateResourceError(KeyParams keys, Resource resource, Throwable e) {
+		// default to nothing
 	}
 
 	@GitWrite
@@ -413,12 +451,15 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeDeleteResource(KeyParams keys, String path) {
+		// default to nothing
 	}
 
 	protected void afterDeleteResourceSuccess(KeyParams keys, String path, T result) {
+		// default to nothing
 	}
 
 	protected void afterDeleteResourceError(KeyParams keys, String path, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -437,14 +478,17 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeCountResources(KeyParams keys, String filter, String paging, String commit, Long at) {
+		// default to nothing
 	}
 
 	protected void afterCountResourcesSuccess(KeyParams keys, String filter, String paging, String commit, Long at,
 			WrapperVO<Long> result) {
+		// default to nothing
 	}
 
 	protected void afterCountResourcesError(KeyParams keys, String filter, String paging, String commit, Long at,
 			Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -463,14 +507,17 @@ public class AbstractFileService<T> {
 
 	protected void beforeListResources(KeyParams keys, String filter, String paging, String sorting, String commit,
 			Long at) {
+		// default to nothing
 	}
 
 	protected void afterListResourcesSuccess(KeyParams keys, String filter, String paging, String sorting,
 			String commit, Long at, List<Resource> result) {
+		// default to nothing
 	}
 
 	protected void afterListResourcesError(KeyParams keys, String filter, String paging, String sorting, String commit,
 			Long at, Throwable e) {
+		// default to nothing
 	}
 
 	// +------------- HISTORY METHODS ------------------+
@@ -494,13 +541,16 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeHistory(KeyParams keys, String paging, Integer skip, Integer max) {
+		// default to nothing
 	}
 
 	protected void afterHistorySuccess(KeyParams keys, String paging, Integer skip, Integer max,
 			List<HistoryVO> result) {
+		// default to nothing
 	}
 
 	protected void afterHistoryError(KeyParams keys, String paging, Throwable e) {
+		// default to nothing
 	}
 
 	@GitRead
@@ -522,12 +572,15 @@ public class AbstractFileService<T> {
 	}
 
 	protected void beforeHistoryResources(KeyParams keys, String path, String paging, Integer skip, Integer max) {
+		// default to nothing
 	}
 
 	protected void afterHistoryResourcesSuccess(KeyParams keys, String path, String paging, Integer skip, Integer max,
 			List<HistoryVO> result) {
+		// default to nothing
 	}
 
 	protected void afterHistoryResourcesError(KeyParams keys, String path, String paging, Throwable e) {
+		// default to nothing
 	}
 }
